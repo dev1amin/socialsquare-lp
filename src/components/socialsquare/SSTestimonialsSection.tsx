@@ -64,22 +64,31 @@ const thirdColumn = testimonials.slice(6, 9);
 
 const SSTestimonialsSection = () => {
   return (
-    <section id="depoimentos" className="py-24 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="depoimentos" className="py-24 overflow-hidden relative">
+      {/* Background glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <span className="text-sm font-medium text-primary tracking-wider uppercase">Depoimentos</span>
-          <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-foreground">
-            Quem usou, não volta atrás
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-primary/20 text-primary mb-4">
+            Depoimentos
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-bold text-foreground">
+            Quem usou, <span className="gradient-text">não volta atrás</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">Criadores reais. Resultados reais. Consistência real.</p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-lg mx-auto">
+            Criadores reais. Resultados reais. Consistência real.
+          </p>
         </motion.div>
 
-        <div className="flex justify-center gap-6 max-h-[600px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+        <div className="flex justify-center gap-6 max-h-[650px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]">
           <TestimonialsColumn testimonials={firstColumn} duration={15} />
           <TestimonialsColumn testimonials={secondColumn} duration={19} className="hidden md:block" />
           <TestimonialsColumn testimonials={thirdColumn} duration={17} className="hidden lg:block" />

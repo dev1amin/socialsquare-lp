@@ -25,10 +25,10 @@ const BlueCursorGlow = () => {
 
   return (
     <motion.div
-      className="pointer-events-none fixed inset-0 z-50"
+      className="pointer-events-none fixed inset-0 z-0"
       animate={{
         background: visible
-          ? `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, hsl(185 85% 50% / 0.04), transparent 60%)`
+          ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, hsl(210 90% 55% / 0.06), transparent 60%)`
           : "transparent",
       }}
       transition={{ type: "tween", duration: 0.15 }}
