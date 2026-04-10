@@ -18,13 +18,13 @@ const SSFooter = lazy(() => import("@/components/socialsquare/SSFooter"));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center py-20">
-    <p className="text-muted-foreground">Carregando...</p>
+    <div className="w-5 h-5 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
   </div>
 );
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <BlueCursorGlow />
       <SSHeader />
       <SSHeroSection />

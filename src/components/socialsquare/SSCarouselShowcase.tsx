@@ -1,48 +1,14 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Check } from "lucide-react";
 
 const slides = [
-  {
-    title: "Como construir autoridade",
-    platform: "Instagram",
-    color: "from-pink-500/20 to-purple-500/20",
-    borderColor: "border-pink-500/20",
-  },
-  {
-    title: "5 erros que travam seu crescimento",
-    platform: "LinkedIn",
-    color: "from-blue-500/20 to-cyan-500/20",
-    borderColor: "border-blue-500/20",
-  },
-  {
-    title: "O segredo da consistência",
-    platform: "Instagram",
-    color: "from-orange-500/20 to-red-500/20",
-    borderColor: "border-orange-500/20",
-  },
-  {
-    title: "Storytelling que converte",
-    platform: "Twitter/X",
-    color: "from-sky-500/20 to-indigo-500/20",
-    borderColor: "border-sky-500/20",
-  },
-  {
-    title: "Rotina de criação em 20min",
-    platform: "LinkedIn",
-    color: "from-emerald-500/20 to-teal-500/20",
-    borderColor: "border-emerald-500/20",
-  },
+  { title: "Como construir autoridade no seu nicho", platform: "Instagram", emoji: "📸" },
+  { title: "5 erros que travam seu crescimento", platform: "LinkedIn", emoji: "💼" },
+  { title: "O segredo da consistência real", platform: "Instagram", emoji: "🎯" },
+  { title: "Storytelling que converte seguidores", platform: "Twitter/X", emoji: "🐦" },
+  { title: "Rotina de criação em 20 minutos", platform: "LinkedIn", emoji: "⚡" },
 ];
-
-const PlatformIcon = ({ platform }: { platform: string }) => {
-  switch (platform) {
-    case "Instagram": return <Instagram className="w-3.5 h-3.5" />;
-    case "LinkedIn": return <Linkedin className="w-3.5 h-3.5" />;
-    case "Twitter/X": return <Twitter className="w-3.5 h-3.5" />;
-    default: return null;
-  }
-};
 
 const SSCarouselShowcase = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -58,67 +24,63 @@ const SSCarouselShowcase = () => {
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!isDragging || !scrollRef.current) return;
-    const dx = e.clientX - dragStart.current.x;
-    scrollRef.current.scrollLeft = dragStart.current.scrollLeft - dx;
+    scrollRef.current.scrollLeft = dragStart.current.scrollLeft - (e.clientX - dragStart.current.x);
   };
 
   const onPointerUp = () => setIsDragging(false);
 
   return (
-    <section className="py-24 overflow-hidden">
+    <section className="py-28 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Left — text */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-primary/20 text-primary mb-6">
-              Formatos
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-bold text-foreground leading-tight">
-              Carrosséis prontos<br />para <span className="gradient-text">engajar</span>
+            <p className="text-sm font-medium text-primary tracking-wide uppercase mb-4">Formatos</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight leading-tight">
+              Carrosséis prontos
+              <br />
+              para <span className="font-serif italic text-primary">engajar</span>
             </h2>
-            <p className="mt-6 text-muted-foreground leading-relaxed text-lg">
-              Você escolhe a referência, o SocialSquare estrutura o conteúdo em slides organizados,
-              com texto pronto e visual adaptado para cada plataforma.
+            <p className="mt-5 text-muted-foreground leading-relaxed text-[17px] max-w-md">
+              Você escolhe a referência, o SocialSquare estrutura slides organizados com texto pronto para cada plataforma.
             </p>
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-8 space-y-3">
               {[
                 "Conteúdo gerado slide a slide",
                 "Formatado para Instagram, LinkedIn e TikTok",
-                "Tom e estilo personalizados para você",
+                "Tom e estilo personalizados",
                 "Pronto para publicar em minutos",
               ].map((item, i) => (
                 <motion.li
                   key={i}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-3 text-sm text-foreground/80"
+                  transition={{ delay: i * 0.08 }}
+                  className="flex items-center gap-3 text-sm text-foreground/70"
                 >
-                  <div className="w-5 h-5 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                  <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-primary" />
-                  </div>
+                  </span>
                   {item}
                 </motion.li>
               ))}
             </ul>
           </motion.div>
 
-          {/* Right — draggable carousel */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="relative"
           >
-            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
             <div
               ref={scrollRef}
@@ -126,33 +88,24 @@ const SSCarouselShowcase = () => {
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
               onPointerCancel={onPointerUp}
-              className="flex gap-5 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none py-4 px-2"
+              className="flex gap-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none py-2 px-1"
             >
               {slides.map((slide, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className={`flex-shrink-0 w-56 h-72 rounded-2xl glass-card overflow-hidden p-5 flex flex-col justify-between card-hover ${slide.borderColor}`}
+                  className="flex-shrink-0 w-52 h-64 rounded-2xl surface-elevated p-5 flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300"
                 >
                   <div>
-                    <div className={`w-full h-24 rounded-xl bg-gradient-to-br ${slide.color} mb-4 flex items-center justify-center`}>
-                      <div className="w-8 h-1 rounded-full bg-foreground/20" />
-                      <div className="w-12 h-1 rounded-full bg-foreground/10 ml-2" />
+                    <div className="w-full h-20 rounded-xl bg-secondary flex items-center justify-center text-2xl mb-4">
+                      {slide.emoji}
                     </div>
-                    <h4 className="text-sm font-semibold text-foreground leading-snug">{slide.title}</h4>
+                    <h4 className="text-[13px] font-semibold text-foreground leading-snug">{slide.title}</h4>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <PlatformIcon platform={slide.platform} />
-                    {slide.platform}
-                  </div>
-                </motion.div>
+                  <span className="text-[11px] text-muted-foreground font-medium">{slide.platform}</span>
+                </div>
               ))}
             </div>
-
-            <p className="text-center text-xs text-muted-foreground/60 mt-3">← Arraste para ver mais →</p>
+            <p className="text-center text-[11px] text-muted-foreground/50 mt-3 font-medium">← Arraste →</p>
           </motion.div>
         </div>
       </div>

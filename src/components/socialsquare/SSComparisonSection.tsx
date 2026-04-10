@@ -4,19 +4,19 @@ import { X, Check, ArrowRight } from "lucide-react";
 const comparisonItems = [
   {
     sem: "A ideia é boa… mas some quando você tenta transformar em post.",
-    com: "Você captura a ideia na hora… e ela vira conteúdo pronto em segundos.",
+    com: "Você captura a ideia na hora — e ela vira conteúdo pronto em segundos.",
   },
   {
     sem: "Seu bloco de notas está cheio… mas tudo parece \"cru demais\" para publicar.",
-    com: "Nenhuma inspiração se perde — post, notícia ou link viram material publicável.",
+    com: "Post, notícia ou link viram material publicável automaticamente.",
   },
   {
     sem: "Você abre a tela em branco… e seu cérebro simplesmente desliga.",
-    com: "A tela em branco desaparece — porque você nunca começa do zero.",
+    com: "A tela em branco desaparece — você nunca começa do zero.",
   },
   {
-    sem: "Você começa a escrever… mas apaga tudo porque \"não ficou bom o suficiente\".",
-    com: "Seu tom de voz já está configurado — tudo sai consistente e natural.",
+    sem: "Você começa a escrever… mas apaga tudo porque \"não ficou bom\".",
+    com: "Seu tom de voz já está configurado — tudo sai consistente.",
   },
   {
     sem: "A inspiração existe… mas a execução nunca acontece.",
@@ -35,75 +35,76 @@ const SSComparisonSection = () => {
   };
 
   return (
-    <section id="comparativo" className="py-24">
-      <div className="container mx-auto px-4">
+    <section id="comparativo" className="py-28">
+      <div className="container mx-auto px-4 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Por que você realmente trava na hora de criar conteúdo?
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight text-balance">
+            Por que você trava na hora de <span className="font-serif italic text-primary">criar conteúdo?</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Você até tem boas ideias. Você se inspira o dia inteiro. Mas quando finalmente senta para criar… nada anda.
-            E não é porque falta criatividade. É porque você está tentando construir um post começando do nada.
+          <p className="mt-4 text-muted-foreground text-[17px] leading-relaxed">
+            Não é falta de criatividade. É tentar construir um post começando do nada.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-destructive mb-4">Sem SocialSquare</h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 mb-4 px-1">
+              <div className="w-2 h-2 rounded-full bg-destructive/60" />
+              <span className="text-sm font-semibold text-foreground/60 uppercase tracking-wide">Sem SocialSquare</span>
+            </div>
             {comparisonItems.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-3 p-4 rounded-xl glass-card"
+                transition={{ delay: i * 0.06 }}
+                className="flex items-start gap-3 p-4 rounded-xl bg-destructive/[0.03] border border-destructive/[0.08]"
               >
-                <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-muted-foreground">{item.sem}</p>
+                <X className="w-4 h-4 text-destructive/50 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-foreground/60 leading-relaxed">{item.sem}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-primary mb-4">Com SocialSquare</h3>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 mb-4 px-1">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-wide">Com SocialSquare</span>
+            </div>
             {comparisonItems.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: 12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-3 p-4 rounded-xl glass-card glow-border"
+                transition={{ delay: i * 0.06 }}
+                className="flex items-start gap-3 p-4 rounded-xl bg-primary/[0.03] border border-primary/[0.08]"
               >
-                <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-foreground/80">{item.com}</p>
+                <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-foreground/80 leading-relaxed">{item.com}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16 max-w-2xl mx-auto"
+          className="text-center mt-14"
         >
-          <p className="text-muted-foreground">
-            O problema nunca foi criatividade. Foi a <strong className="text-foreground">distância entre a inspiração e o conteúdo final</strong>.
-            E enquanto essa distância existir, você vai continuar travando. Não por incapacidade. Mas por tentar criar a partir de nada.
-          </p>
           <button
             onClick={scrollToCTA}
-            className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all"
           >
-            Quer ver esse sistema funcionando na prática?
-            <ArrowRight className="w-4 h-4" />
+            Ver na prática
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </motion.div>
       </div>
