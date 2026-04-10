@@ -2,53 +2,15 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-
-function ElegantShape({
-  className,
-  delay = 0,
-  width = 400,
-  height = 100,
-  rotate = 0,
-}: {
-  className?: string;
-  delay?: number;
-  width?: number;
-  height?: number;
-  rotate?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
-      animate={{ opacity: 1, y: 0, rotate }}
-      transition={{ duration: 2.4, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={cn("absolute", className)}
-    >
-      <motion.div
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        style={{ width, height }}
-        className="rounded-full bg-gradient-to-r from-glow-cyan/[0.08] to-glow-blue/[0.06] border border-glow-cyan/[0.08] backdrop-blur-[2px]"
-      />
-    </motion.div>
-  );
-}
+import { ArrowRight } from "lucide-react";
 
 const rotatingPhrases = [
   "sem esforço.",
-  "sem perder tempo.",
-  "sem precisar ser criativo todos os dias.",
+  "sem perder\ntempo.",
+  "sem precisar ser criativo\ntodos os dias.",
 ];
 
-function HeroGeometric({
-  badge = "SocialSquare",
-  title1 = "Seu conteúdo a um",
-  title2 = "clique de distância",
-}: {
-  badge?: string;
-  title1?: string;
-  title2?: string;
-}) {
+function HeroGeometric() {
   const [phraseIndex, setPhraseIndex] = useState(0);
 
   useEffect(() => {
@@ -58,71 +20,87 @@ function HeroGeometric({
     return () => clearInterval(interval);
   }, []);
 
-  const fadeUpVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1,
-        delay: 0.5 + i * 0.2,
+        duration: 0.8,
+        delay: 0.3 + i * 0.15,
         ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
       },
     }),
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background">
-      <div className="absolute inset-0 hero-glow" />
+    <div className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-background">
+      {/* Subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(hsl(220 20% 10%) 1px, transparent 1px), linear-gradient(90deg, hsl(220 20% 10%) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px',
+        }}
+      />
 
-      <ElegantShape className="-left-32 top-[15%]" width={600} height={140} rotate={12} delay={0.3} />
-      <ElegantShape className="-right-32 top-[20%]" width={500} height={120} rotate={-15} delay={0.5} />
-      <ElegantShape className="left-[15%] bottom-[15%]" width={300} height={80} rotate={-8} delay={0.4} />
-      <ElegantShape className="right-[20%] bottom-[20%]" width={200} height={60} rotate={20} delay={0.6} />
+      {/* Soft brand glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-light/60 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Extra shapes */}
-      <ElegantShape className="left-[40%] top-[10%]" width={150} height={40} rotate={25} delay={0.7} />
-      <ElegantShape className="right-[5%] top-[50%]" width={250} height={70} rotate={-20} delay={0.8} />
-
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <motion.div custom={0} variants={fadeUpVariants} initial="hidden" animate="visible">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-glow-cyan/20 text-foreground/60 backdrop-blur-sm">
-            {badge}
+      <div className="relative z-10 container mx-auto px-4 text-center max-w-4xl pt-20">
+        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-brand-light text-primary border border-brand-medium">
+            Novo: Canvas já disponível
           </span>
         </motion.div>
 
-        <motion.div custom={1} variants={fadeUpVariants} initial="hidden" animate="visible">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight mt-8">
-            <span className="text-foreground">{title1}</span>
+        <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible" className="mt-8 text-balance">
+          <span className="block text-4xl sm:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-foreground leading-[1.08]">
+            Seu conteúdo a um
+          </span>
+          <span className="block text-4xl sm:text-6xl lg:text-[4.5rem] font-serif italic text-primary leading-[1.08] mt-1">
+            clique de distância
+          </span>
+        </motion.h1>
+
+        <motion.div custom={2} variants={fadeUp} initial="hidden" animate="visible" className="mt-8 max-w-xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+            Transforme qualquer inspiração em conteúdo
             <br />
-            <span className="gradient-text">{title2}</span>
-          </h1>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={phraseIndex}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className="text-foreground font-semibold inline-block whitespace-pre-line"
+              >
+                {rotatingPhrases[phraseIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </p>
         </motion.div>
 
-        <motion.p custom={2} variants={fadeUpVariants} initial="hidden" animate="visible" className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Transforme qualquer inspiração em conteúdo{" "}
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={phraseIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4 }}
-              className="gradient-text font-semibold inline-block"
-            >
-              {rotatingPhrases[phraseIndex]}
-            </motion.span>
-          </AnimatePresence>
-        </motion.p>
-
-        <motion.div custom={3} variants={fadeUpVariants} initial="hidden" animate="visible" className="mt-10">
+        <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#assinar"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-opacity glow-box"
+            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-all soft-shadow"
           >
-            Assinar agora
+            Começar grátis
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+          <a
+            href="#como-funciona"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-muted-foreground font-medium text-base hover:text-foreground hover:bg-secondary transition-all"
+          >
+            Ver como funciona
           </a>
         </motion.div>
+
+        <motion.p custom={4} variants={fadeUp} initial="hidden" animate="visible" className="mt-5 text-xs text-muted-foreground/60">
+          7 dias grátis · Sem cartão · Cancele quando quiser
+        </motion.p>
       </div>
     </div>
   );

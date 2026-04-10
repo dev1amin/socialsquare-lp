@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 const BlueCursorGlow = () => {
-  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+  const [mousePos, setMousePos] = useState({ x: -200, y: -200 });
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -24,14 +23,12 @@ const BlueCursorGlow = () => {
   }, [visible]);
 
   return (
-    <motion.div
-      className="pointer-events-none fixed inset-0 z-0"
-      animate={{
-        background: visible
-          ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, hsl(210 90% 55% / 0.06), transparent 60%)`
-          : "transparent",
+    <div
+      className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
+      style={{
+        opacity: visible ? 1 : 0,
+        background: `radial-gradient(500px circle at ${mousePos.x}px ${mousePos.y}px, hsl(222 80% 52% / 0.03), transparent 60%)`,
       }}
-      transition={{ type: "tween", duration: 0.15 }}
     />
   );
 };

@@ -1,105 +1,54 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Shield, Layers, Users, PenTool, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
-  {
-    icon: Zap,
-    title: "Conversão instantânea",
-    description:
-      "De link, print ou ideia para post pronto em segundos. Sem atrito, sem etapas manuais.",
-    stat: "5s",
-    statLabel: "tempo médio",
-  },
-  {
-    icon: Shield,
-    title: "Tom de voz único",
-    description:
-      "O sistema aprende como você se comunica e gera conteúdo que soa natural — como se você tivesse escrito.",
-    stat: "100%",
-    statLabel: "personalizado",
-  },
-  {
-    icon: Layers,
-    title: "Multi-formato",
-    description:
-      "Posts de texto, carrosséis, legendas, threads. Um clique, vários formatos, todas as plataformas.",
-    stat: "4+",
-    statLabel: "formatos",
-  },
-  {
-    icon: PenTool,
-    title: "Canvas intuitivo",
-    description:
-      "Ambiente visual onde você joga referências e o sistema entrega conteúdo estruturado.",
-    stat: "Zero",
-    statLabel: "curva de aprendizado",
-  },
-  {
-    icon: BarChart3,
-    title: "Consistência garantida",
-    description:
-      "Publique todo dia sem depender de inspiração. O sistema transforma rotina em crescimento.",
-    stat: "7x",
-    statLabel: "por semana",
-  },
-  {
-    icon: Users,
-    title: "Para qualquer nicho",
-    description:
-      "Coach, nutricionista, advogado, fotógrafo — o SocialSquare se adapta ao seu mercado.",
-    stat: "50+",
-    statLabel: "nichos atendidos",
-  },
+  { icon: Zap, title: "Conversão instantânea", description: "De link ou ideia para post pronto em segundos.", stat: "5s", statLabel: "tempo médio" },
+  { icon: Shield, title: "Tom de voz único", description: "O sistema aprende como você se comunica.", stat: "100%", statLabel: "personalizado" },
+  { icon: Layers, title: "Multi-formato", description: "Posts, carrosséis, legendas, threads. Um clique.", stat: "4+", statLabel: "formatos" },
+  { icon: PenTool, title: "Canvas intuitivo", description: "Jogue referências e receba conteúdo estruturado.", stat: "Zero", statLabel: "curva" },
+  { icon: BarChart3, title: "Consistência garantida", description: "Publique todo dia sem depender de inspiração.", stat: "7x", statLabel: "semana" },
+  { icon: Users, title: "Qualquer nicho", description: "Coach, nutricionista, advogado — se adapta a você.", stat: "50+", statLabel: "nichos" },
 ];
 
 const SSFeaturesSection = () => {
   return (
-    <section id="funcionalidades" className="py-24">
-      <div className="container mx-auto px-4">
+    <section id="funcionalidades" className="py-28 brand-gradient-bg">
+      <div className="container mx-auto px-4 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <span className="text-sm font-medium text-primary tracking-wider uppercase">Funcionalidades</span>
-          <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-foreground">
-            Tudo que você precisa para criar sem travar
+          <p className="text-sm font-medium text-primary tracking-wide uppercase mb-3">Funcionalidades</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+            Tudo para criar sem <span className="font-serif italic text-primary">travar</span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Cada funcionalidade foi pensada para eliminar o atrito entre a sua ideia e o conteúdo publicado.
-          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature, i) => {
             const Icon = feature.icon;
-            const isWide = i >= 4; // last 2 cards span 3 cols each
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={isWide ? "sm:col-span-1 lg:col-span-1" : ""}
+                transition={{ delay: i * 0.06 }}
+                className="surface-elevated p-6 hover:-translate-y-0.5 transition-transform duration-300"
               >
-                <Card className="glass-card card-hover h-full border-0">
-                  <CardContent className="p-6">
-                    {feature.stat && (
-                      <div className="mb-4">
-                        <span className="text-2xl font-bold gradient-text">{feature.stat}</span>
-                        <span className="text-xs text-muted-foreground ml-2">{feature.statLabel}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center gap-3 mb-3">
-                      <Icon className="w-5 h-5 text-primary" />
-                      <h3 className="font-semibold text-foreground">{feature.title}</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/[0.06] flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xl font-bold text-foreground">{feature.stat}</span>
+                    <span className="text-[10px] text-muted-foreground ml-1">{feature.statLabel}</span>
+                  </div>
+                </div>
+                <h3 className="font-semibold text-foreground text-[15px]">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{feature.description}</p>
               </motion.div>
             );
           })}
