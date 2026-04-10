@@ -9,11 +9,13 @@ const SSCanvasShowcase = () => {
         behindCard={<BlueWebGLShader />}
         titleComponent={
           <div className="text-center mb-8">
-            <span className="text-sm font-medium text-primary tracking-wider uppercase">Produto</span>
-            <h2 className="text-3xl sm:text-5xl font-bold mt-3 text-foreground">
-              Conheça o Canvas
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-primary/20 text-primary mb-4">
+              Produto
+            </span>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground">
+              Conheça o <span className="gradient-text">Canvas</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-lg">
               O ambiente onde inspiração vira conteúdo. Simples, fluido, poderoso.
             </p>
           </div>

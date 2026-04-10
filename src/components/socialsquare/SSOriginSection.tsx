@@ -11,7 +11,7 @@ const capabilities = [
 
 const SSOriginSection = () => {
   return (
-    <section className="py-24">
+    <section id="origem" className="py-24">
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
