@@ -1,69 +1,85 @@
 import { motion } from "framer-motion";
-import { Brain, Target, Layout, MessageSquare, Layers, Zap } from "lucide-react";
 
 const painPoints = [
-  { icon: Brain, text: "Pensar no tema" },
-  { icon: Target, text: "Definir o ângulo" },
-  { icon: Layout, text: "Montar a estrutura" },
-  { icon: MessageSquare, text: "Escolher o tom" },
-  { icon: Layers, text: "Encaixar o posicionamento" },
-  { icon: Zap, text: "E fazer tudo isso rápido" },
+  { emoji: "🧠", text: "Pensar no tema" },
+  { emoji: "🎯", text: "Definir o ângulo" },
+  { emoji: "🏗️", text: "Montar a estrutura" },
+  { emoji: "🗣️", text: "Escolher o tom" },
+  { emoji: "🧩", text: "Encaixar o posicionamento" },
+  { emoji: "⚡", text: "E fazer tudo isso rápido" },
 ];
 
 const SSProblemSection = () => {
   return (
-    <section className="py-28 brand-gradient-bg">
-      <div className="container mx-auto px-4 max-w-3xl">
+    <section className="py-28 relative overflow-hidden">
+      {/* Diagonal stripe accent */}
+      <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary/[0.03] rotate-12 rounded-3xl" />
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-primary/[0.02] -rotate-12 rounded-3xl" />
+
+      <div className="container mx-auto px-4 max-w-4xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight leading-tight text-balance">
-            O problema nunca foi <span className="font-serif italic">"não saber criar"</span> — foi começar do zero.
+          <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight leading-tight">
+            O problema nunca foi{" "}
+            <span className="relative inline-block">
+              <span className="font-serif italic">"não saber criar"</span>
+              <motion.span
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="absolute bottom-1 left-0 w-full h-[3px] bg-primary/30 origin-left"
+              />
+            </span>
           </h2>
-          <p className="mt-6 text-muted-foreground leading-relaxed max-w-xl mx-auto text-[17px]">
-            Criar conteúdo é difícil porque o processo tradicional exige transformar uma inspiração crua em post completo, sozinho, do nada.
+          <p className="mt-6 text-muted-foreground leading-relaxed max-w-xl mx-auto text-lg">
+            Foi começar do zero. Sempre.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15 }}
-          className="mt-14 surface-elevated p-8"
-        >
-          <p className="text-sm font-semibold text-foreground mb-5 uppercase tracking-wide">Criar do zero exige:</p>
-          <div className="grid sm:grid-cols-2 gap-3">
+        {/* Staggered horizontal scroll-like cards */}
+        <div className="relative">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-6 text-center"
+          >
+            Criar do zero exige →
+          </motion.p>
+
+          <div className="flex flex-wrap justify-center gap-3">
             {painPoints.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 20, rotate: (i % 2 === 0 ? -2 : 2) }}
+                whileInView={{ opacity: 1, y: 0, rotate: (i % 2 === 0 ? -1 : 1) }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary"
+                transition={{ delay: i * 0.08, type: "spring", stiffness: 200 }}
+                className="px-5 py-3 rounded-2xl bg-background border border-border shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default"
               >
-                <item.icon className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm text-foreground/70">{item.text}</span>
+                <span className="text-lg mr-2">{item.emoji}</span>
+                <span className="text-sm font-medium text-foreground">{item.text}</span>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.25 }}
-          className="mt-12 text-center"
+          transition={{ delay: 0.5 }}
+          className="mt-16 text-center"
         >
-          <div className="inline-block surface-elevated px-8 py-5 text-center">
-            <p className="text-sm font-medium text-foreground">A verdade é simples:</p>
-            <p className="mt-1.5 text-sm text-muted-foreground">
-              Só falta um sistema que transforme <strong className="text-foreground">o que te inspira</strong> no <strong className="text-foreground">que você publica</strong>.
+          <div className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-primary/[0.05] border border-primary/10">
+            <span className="text-2xl">💡</span>
+            <p className="text-sm text-foreground">
+              Só falta um sistema que transforme <strong>o que te inspira</strong> no <strong>que você publica</strong>.
             </p>
           </div>
         </motion.div>

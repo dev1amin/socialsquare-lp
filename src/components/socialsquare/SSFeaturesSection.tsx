@@ -12,7 +12,7 @@ const features = [
 
 const SSFeaturesSection = () => {
   return (
-    <section id="funcionalidades" className="py-28 brand-gradient-bg">
+    <section id="funcionalidades" className="py-28">
       <div className="container mx-auto px-4 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,19 +36,25 @@ const SSFeaturesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="surface-elevated p-6 hover:-translate-y-0.5 transition-transform duration-300"
+                className="relative overflow-hidden rounded-2xl border border-border bg-background p-6 hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/[0.06] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xl font-bold text-foreground">{feature.stat}</span>
-                    <span className="text-[10px] text-muted-foreground ml-1">{feature.statLabel}</span>
+                {/* Background icon - tilted, with blue glow */}
+                <div className="absolute -right-4 -top-4 opacity-[0.04] group-hover:opacity-[0.07] transition-opacity duration-500">
+                  <Icon className="w-32 h-32 text-primary" style={{ transform: "rotate(-15deg)" }} />
+                </div>
+                {/* Blue glow reaching toward icon */}
+                <div className="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-primary/[0.04] blur-2xl group-hover:bg-primary/[0.08] transition-all duration-500" />
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="font-semibold text-foreground text-[15px] mb-1.5">{feature.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+
+                  <div className="mt-5 pt-4 border-t border-border/50 flex items-baseline gap-1.5">
+                    <span className="text-2xl font-bold text-primary">{feature.stat}</span>
+                    <span className="text-xs text-muted-foreground">{feature.statLabel}</span>
                   </div>
                 </div>
-                <h3 className="font-semibold text-foreground text-[15px]">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{feature.description}</p>
               </motion.div>
             );
           })}

@@ -1,14 +1,73 @@
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { BlueWebGLShader } from "@/components/ui/blue-webgl-shader";
+import { motion } from "framer-motion";
+
+const generateStars = (count: number) => {
+  const stars: { x: number; y: number; size: number; rotation: number; opacity: number; type: number }[] = [];
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 12 + Math.random() * 28,
+      rotation: Math.random() * 360,
+      opacity: 0.08 + Math.random() * 0.15,
+      type: i % 3,
+    });
+  }
+  return stars;
+};
+
+const stars = generateStars(35);
+
+const StarShape = ({ size, rotation, opacity, type }: { size: number; rotation: number; opacity: number; type: number }) => {
+  if (type === 0) {
+    // 4-point star
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ transform: `rotate(${rotation}deg)` }}>
+        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor" opacity={opacity} />
+      </svg>
+    );
+  }
+  if (type === 1) {
+    // 6-point star / asterisk style
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ transform: `rotate(${rotation}deg)` }}>
+        <path d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5Z" fill="currentColor" opacity={opacity} />
+        <path d="M12 2L14 10L22 12L14 14L12 22L10 14L2 12L10 10Z" fill="currentColor" opacity={opacity * 0.5} />
+      </svg>
+    );
+  }
+  // Sparkle / diamond
+  return (
+    <svg width={size * 0.7} height={size} viewBox="0 0 16 24" fill="none" style={{ transform: `rotate(${rotation}deg)` }}>
+      <path d="M8 0L10 10L8 24L6 10Z" fill="currentColor" opacity={opacity} />
+      <path d="M0 12L8 10L16 12L8 14Z" fill="currentColor" opacity={opacity * 0.7} />
+    </svg>
+  );
+};
 
 const SSCanvasShowcase = () => {
   return (
-    <section id="produto" className="py-8 overflow-hidden">
+    <section id="produto" className="py-8 overflow-hidden relative">
+      {/* Vintage street stars background */}
+      <div className="absolute inset-0 pointer-events-none text-primary">
+        {stars.map((star, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            style={{ left: `${star.x}%`, top: `${star.y}%` }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.02, duration: 0.5 }}
+          >
+            <StarShape size={star.size} rotation={star.rotation} opacity={star.opacity} type={star.type} />
+          </motion.div>
+        ))}
+      </div>
+
       <ContainerScroll
-        behindCard={<BlueWebGLShader />}
         titleComponent={
           <div className="text-center mb-8">
-            <p className="text-sm font-medium text-primary tracking-wide uppercase mb-3">Produto</p>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
               Conheça o <span className="font-serif italic text-primary">Canvas</span>
             </h2>
