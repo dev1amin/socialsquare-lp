@@ -75,7 +75,7 @@ const SSComparisonSection = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-row items-center justify-center gap-12 sm:gap-20 lg:gap-32">
+        <div className="flex flex-row items-center justify-center gap-20 sm:gap-32 lg:gap-48">
           {/* Phone SEM */}
           <motion.div
             initial={{ opacity: 0, x: -40, rotate: -6 }}
