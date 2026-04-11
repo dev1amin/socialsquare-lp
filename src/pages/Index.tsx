@@ -9,7 +9,6 @@ const SSComparisonSection = lazy(() => import("@/components/socialsquare/SSCompa
 const SSProblemSection = lazy(() => import("@/components/socialsquare/SSProblemSection"));
 const SSOriginSection = lazy(() => import("@/components/socialsquare/SSOriginSection"));
 const SSHowItWorksSection = lazy(() => import("@/components/socialsquare/SSHowItWorksSection"));
-const SSWorkflowSection = lazy(() => import("@/components/socialsquare/SSWorkflowSection"));
 const SSFeaturesSection = lazy(() => import("@/components/socialsquare/SSFeaturesSection"));
 const SSTestimonialsSection = lazy(() => import("@/components/socialsquare/SSTestimonialsSection"));
 const SSFAQSection = lazy(() => import("@/components/socialsquare/SSFAQSection"));
@@ -34,7 +33,6 @@ const Index = () => {
       <Suspense fallback={<LoadingFallback />}><SSProblemSection /></Suspense>
       <Suspense fallback={<LoadingFallback />}><SSOriginSection /></Suspense>
       <Suspense fallback={<LoadingFallback />}><SSHowItWorksSection /></Suspense>
-      <Suspense fallback={<LoadingFallback />}><SSWorkflowSection /></Suspense>
       <Suspense fallback={<LoadingFallback />}><SSFeaturesSection /></Suspense>
       <Suspense fallback={<LoadingFallback />}><SSTestimonialsSection /></Suspense>
       <Suspense fallback={<LoadingFallback />}><SSFAQSection /></Suspense>
