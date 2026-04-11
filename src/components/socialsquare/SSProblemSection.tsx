@@ -12,7 +12,6 @@ const painPoints = [
 const SSProblemSection = () => {
   return (
     <section className="py-28 relative overflow-hidden">
-      {/* Diagonal stripe accent */}
       <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary/[0.03] rotate-12 rounded-3xl" />
       <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-primary/[0.02] -rotate-12 rounded-3xl" />
 
@@ -26,7 +25,7 @@ const SSProblemSection = () => {
           <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight leading-tight">
             O problema nunca foi{" "}
             <span className="relative inline-block">
-              <span className="font-serif italic">"não saber criar"</span>
+              <span className="font-serif italic text-primary">"não saber criar"</span>
               <motion.span
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
@@ -41,7 +40,6 @@ const SSProblemSection = () => {
           </p>
         </motion.div>
 
-        {/* Staggered horizontal scroll-like cards */}
         <div className="relative">
           <motion.p
             initial={{ opacity: 0 }}

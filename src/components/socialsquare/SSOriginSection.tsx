@@ -1,21 +1,25 @@
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const timeline = [
-  { emoji: "👀", label: "Capturar", desc: "o que você vê" },
-  { emoji: "🧠", label: "Processar", desc: "o que você sabe" },
-  { emoji: "🎙️", label: "Entender", desc: "o seu tom" },
-  { emoji: "🏗️", label: "Estruturar", desc: "a sua visão" },
-  { emoji: "✨", label: "Entregar", desc: "conteúdo pronto" },
+const steps = [
+  { num: "01", title: "O problema", text: "Todo mundo tem ideias. Poucos conseguem transformá-las em posts." },
+  { num: "02", title: "A tentativa", text: "Cursos, planners, prompts — todos dizem 'pense em algo e crie'. Mas o bloqueio nunca foi falta de criatividade." },
+  { num: "03", title: "A virada", text: "E se você não precisasse começar do zero? E se o sistema fizesse a ponte entre o que te inspira e o que você publica?" },
 ];
 
 const SSOriginSection = () => {
+  const scrollToCTA = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    const el = document.getElementById("assinar");
+    if (el) {
+      const offset = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: offset, behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="origem" className="py-28 relative overflow-hidden">
-      {/* Abstract background shapes */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-primary/[0.02] blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/[0.015] blur-3xl" />
-
-      <div className="container mx-auto px-4 max-w-4xl relative z-10">
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,101 +28,59 @@ const SSOriginSection = () => {
         >
           <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
             Nasceu de uma mudança{" "}
-            <span className="relative">
-              <span className="font-serif italic text-primary">simples</span>
-              <motion.span
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="absolute -bottom-1 left-0 h-[2px] bg-primary/30"
-              />
-            </span>
+            <span className="font-serif italic text-primary">simples</span>
           </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-lg mx-auto">
+            Parar de criar do zero. Começar a criar do que já existe.
+          </p>
         </motion.div>
 
-        {/* Big quote card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative mb-20"
-        >
-          <div className="bg-foreground text-background rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-            <div className="absolute top-4 left-6 text-6xl font-serif text-background/10 leading-none">"</div>
-            <div className="relative z-10 space-y-4 max-w-2xl mx-auto text-center">
-              <p className="text-lg sm:text-xl leading-relaxed font-light">
-                As pessoas não precisam de mais ideias — precisam de um sistema que transforme as ideias que já têm em{" "}
-                <strong className="font-semibold">execução.</strong>
-              </p>
-              <p className="text-sm text-background/50">
-                O mercado tentou resolver com cursos, planners e prompts. Todos baseados no mesmo paradigma:{" "}
-                <em>"pense em algo e crie."</em>
-              </p>
-            </div>
-            <div className="absolute bottom-4 right-6 text-6xl font-serif text-background/10 leading-none rotate-180">"</div>
-          </div>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="mb-16">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-8 text-center"
-          >
-            A camada que faltava
-          </motion.p>
-
-          <div className="relative">
-            {/* Connecting line */}
-            <div className="hidden sm:block absolute top-8 left-0 right-0 h-[2px] bg-border" />
-
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-2">
-              {timeline.map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="text-center relative"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-background border border-border shadow-sm mx-auto mb-3 flex items-center justify-center text-2xl relative z-10">
-                    {step.emoji}
-                  </div>
-                  <p className="text-sm font-semibold text-foreground">{step.label}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{step.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+        {/* Narrative cards - stacked editorial style */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12 }}
+              className="relative group"
+            >
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-background p-8 h-full hover:-translate-y-1 transition-all duration-300">
+                {/* Big number background */}
+                <span className="absolute -top-4 -right-2 text-[120px] font-bold text-foreground/[0.03] leading-none select-none">
+                  {step.num}
+                </span>
+                <div className="relative z-10">
+                  <span className="text-xs font-bold text-primary uppercase tracking-[0.15em]">{step.num}</span>
+                  <h3 className="text-xl font-bold text-foreground mt-2 mb-3">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{step.text}</p>
+                </div>
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Bottom badges */}
+        {/* Punchline */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3"
+          className="text-center"
         >
-          {["Sem esforço", "Sem atrito", "No seu ritmo"].map((text, i) => (
-            <span key={i} className="px-5 py-2 rounded-full text-sm font-medium text-primary bg-primary/[0.06] border border-primary/10">
-              {text} ✦
-            </span>
-          ))}
+          <p className="text-xl sm:text-2xl font-serif italic text-foreground mb-6">
+            "Seu conteúdo a um clique de distância."
+          </p>
+          <button
+            onClick={scrollToCTA}
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+          >
+            Comece agora
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </button>
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-center text-foreground font-semibold text-xl mt-14 font-serif italic"
-        >
-          "Seu conteúdo a um clique de distância."
-        </motion.p>
       </div>
     </section>
   );
