@@ -1,13 +1,16 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import slide01 from "@/assets/slide_01.png";
+import slide02 from "@/assets/slide_02.png";
+import slide03 from "@/assets/slide_03.png";
+import slide04 from "@/assets/slide_04.png";
 
 const slides = [
-  { title: "Como construir autoridade no seu nicho", platform: "Instagram", emoji: "📸" },
-  { title: "5 erros que travam seu crescimento", platform: "LinkedIn", emoji: "💼" },
-  { title: "O segredo da consistência real", platform: "Instagram", emoji: "🎯" },
-  { title: "Storytelling que converte seguidores", platform: "Twitter/X", emoji: "🐦" },
-  { title: "Rotina de criação em 20 minutos", platform: "LinkedIn", emoji: "⚡" },
+  { image: slide01, title: "Polarização política" },
+  { image: slide02, title: "Critérios de representação" },
+  { image: slide03, title: "Figuras que ganham força" },
+  { image: slide04, title: "Padrão eleitoral previsível" },
 ];
 
 const SSCarouselShowcase = () => {
@@ -77,10 +80,9 @@ const SSCarouselShowcase = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative"
+            className="relative lg:-mr-20"
           >
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
             <div
               ref={scrollRef}
@@ -88,20 +90,19 @@ const SSCarouselShowcase = () => {
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
               onPointerCancel={onPointerUp}
-              className="flex gap-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none py-2 px-1"
+              className="flex gap-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none py-2 pl-4"
             >
               {slides.map((slide, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-52 h-64 rounded-2xl surface-elevated p-5 flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300"
+                  className="flex-shrink-0 w-56 sm:w-64 rounded-2xl overflow-hidden shadow-lg hover:-translate-y-1 transition-transform duration-300"
                 >
-                  <div>
-                    <div className="w-full h-20 rounded-xl bg-secondary flex items-center justify-center text-2xl mb-4">
-                      {slide.emoji}
-                    </div>
-                    <h4 className="text-[13px] font-semibold text-foreground leading-snug">{slide.title}</h4>
-                  </div>
-                  <span className="text-[11px] text-muted-foreground font-medium">{slide.platform}</span>
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-auto object-cover"
+                    draggable={false}
+                  />
                 </div>
               ))}
             </div>
