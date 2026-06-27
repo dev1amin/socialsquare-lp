@@ -18,67 +18,56 @@ const SSOriginSection = () => {
   };
 
   return (
-    <section id="origem" className="py-28 relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-5xl relative z-10">
+    <section id="origem" className="py-24 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
-            Nasceu de uma mudança{" "}
-            <span className="font-serif italic text-primary">simples</span>
+          <span className="eyebrow-chip">Origem</span>
+          <h2 className="mt-5 text-balance text-3xl font-bold tracking-[-0.04em] text-foreground sm:text-5xl">
+            Nasceu de uma mudança <span className="font-serif-display italic text-primary">simples</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-lg mx-auto">
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
             Parar de criar do zero. Começar a criar do que já existe.
           </p>
         </motion.div>
 
-        {/* Narrative cards - stacked editorial style */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
+        <div className="grid gap-4 lg:grid-cols-3">
+          {steps.map((step, index) => (
+            <motion.article
+              key={step.num}
+              initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              className="relative group"
+              transition={{ delay: index * 0.08 }}
+              className="surface-card relative rounded-[1.9rem] p-6 sm:p-7"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-background p-8 h-full hover:-translate-y-1 transition-all duration-300">
-                {/* Big number background */}
-                <span className="absolute -top-4 -right-2 text-[120px] font-bold text-foreground/[0.03] leading-none select-none">
-                  {step.num}
-                </span>
-                <div className="relative z-10">
-                  <span className="text-xs font-bold text-primary uppercase tracking-[0.15em]">{step.num}</span>
-                  <h3 className="text-xl font-bold text-foreground mt-2 mb-3">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{step.text}</p>
-                </div>
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
-              </div>
-            </motion.div>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{step.num}</span>
+              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-foreground">{step.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-[15px]">{step.text}</p>
+            </motion.article>
           ))}
         </div>
 
-        {/* Punchline */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          transition={{ delay: 0.2 }}
+          className="mt-10 rounded-[2rem] border border-border/80 bg-white/70 px-5 py-6 text-center backdrop-blur sm:px-8"
         >
-          <p className="text-xl sm:text-2xl font-serif italic text-foreground mb-6">
-            "Seu conteúdo a um clique de distância."
+          <p className="text-2xl italic text-foreground sm:text-3xl">
+            <span className="font-serif-display">"Seu conteúdo a um clique de distância."</span>
           </p>
           <button
             onClick={scrollToCTA}
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+            className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/85"
           >
             Comece agora
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
         </motion.div>
       </div>

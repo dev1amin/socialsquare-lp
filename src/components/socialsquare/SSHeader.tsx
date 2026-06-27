@@ -53,20 +53,20 @@ const SSHeader = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
-      <div className="mx-auto max-w-3xl mt-4 px-4">
-        <div className="bg-card/80 backdrop-blur-xl border border-border rounded-2xl px-5 h-14 flex items-center justify-between soft-shadow">
+      <div className="mx-auto mt-5 max-w-6xl px-4">
+        <div className="glass-panel rounded-[1.75rem] border border-white/70 px-4 sm:px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
-            <img src={logoSrc} alt="SocialSquare" className="w-7 h-7" />
-            <span className="text-[15px] font-semibold text-foreground tracking-tight">SocialSquare</span>
+            <img src={logoSrc} alt="SocialSquare" className="w-8 h-8" />
+            <span className="text-[16px] font-semibold text-foreground tracking-tight">SocialSquare</span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1 rounded-full border border-border/70 bg-white/60 px-2 py-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-[13px] text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5 rounded-lg hover:bg-secondary"
+                className="rounded-full px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -76,15 +76,17 @@ const SSHeader = () => {
           <div className="hidden md:flex items-center">
             <button
               onClick={scrollToCTA}
-              className="px-4 py-1.5 rounded-xl bg-primary text-primary-foreground text-[13px] font-semibold hover:bg-primary/90 transition-colors"
+              className="rounded-full bg-primary px-5 py-2.5 text-[13px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             >
               Assinar agora
             </button>
           </div>
 
           <button
-            className="md:hidden text-foreground"
+            className="md:hidden rounded-full border border-border/70 bg-white/70 p-2 text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -97,22 +99,22 @@ const SSHeader = () => {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="md:hidden mx-auto max-w-3xl px-4 mt-2"
+            className="md:hidden mx-auto mt-3 max-w-6xl px-4"
           >
-            <div className="bg-card border border-border rounded-2xl p-3 soft-shadow-lg flex flex-col gap-1">
+            <div className="glass-panel flex flex-col gap-1 rounded-[1.5rem] p-3">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors py-2.5 px-3 rounded-lg hover:bg-secondary"
+                  className="rounded-2xl px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
                 >
                   {link.label}
                 </a>
               ))}
               <button
                 onClick={() => { scrollToCTA(); setMobileOpen(false); }}
-                className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors mt-1"
+                className="mt-1 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 Assinar agora
               </button>

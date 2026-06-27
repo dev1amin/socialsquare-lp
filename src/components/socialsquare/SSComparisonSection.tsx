@@ -1,52 +1,51 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ThumbsDown, ThumbsUp, Heart, MessageCircle, Share2, UserMinus, UserPlus, TrendingDown, TrendingUp } from "lucide-react";
+import {
+  ArrowRight,
+  Heart,
+  MessageCircle,
+  Share2,
+  ThumbsDown,
+  ThumbsUp,
+  TrendingDown,
+  TrendingUp,
+  UserMinus,
+  UserPlus,
+} from "lucide-react";
 
 const semNotifications = [
-  { icon: ThumbsDown, text: "2 curtidas", position: "top-2 -left-12 sm:-left-16", rotation: "-12deg" },
-  { icon: UserMinus, text: "-3 seguidores", position: "top-16 -right-10 sm:-right-16", rotation: "8deg" },
-  { icon: Share2, text: "1 compartilhamento", position: "bottom-28 -left-10 sm:-left-14", rotation: "-6deg" },
-  { icon: MessageCircle, text: "0 comentários", position: "bottom-14 -right-10 sm:-right-14", rotation: "10deg" },
-  { icon: TrendingDown, text: "Alcance: 12", position: "top-32 -left-12 sm:-left-20", rotation: "-4deg" },
+  { icon: ThumbsDown, text: "2 curtidas" },
+  { icon: UserMinus, text: "-3 seguidores" },
+  { icon: TrendingDown, text: "Alcance: 12" },
 ];
 
 const comNotifications = [
-  { icon: Heart, text: "847 curtidas", position: "top-2 -right-12 sm:-right-16", rotation: "10deg" },
-  { icon: UserPlus, text: "+126 seguidores", position: "top-16 -left-10 sm:-left-16", rotation: "-8deg" },
-  { icon: Share2, text: "93 compartilhamentos", position: "bottom-28 -right-10 sm:-right-14", rotation: "6deg" },
-  { icon: MessageCircle, text: "64 comentários", position: "bottom-14 -left-10 sm:-left-14", rotation: "-10deg" },
-  { icon: TrendingUp, text: "Alcance: 12.4k", position: "top-32 -right-12 sm:-right-20", rotation: "4deg" },
+  { icon: Heart, text: "847 curtidas" },
+  { icon: UserPlus, text: "+126 seguidores" },
+  { icon: TrendingUp, text: "Alcance: 12.4k" },
 ];
 
-const PhoneFrame = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <div className={`relative ${className}`}>
-    <div className="w-[200px] sm:w-[240px] h-[400px] sm:h-[480px] rounded-[2rem] border-[5px] border-foreground/10 bg-background shadow-xl overflow-hidden relative">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-foreground/10 rounded-b-2xl z-10" />
-      <div className="pt-8 px-3 h-full overflow-hidden">
-        {children}
-      </div>
-    </div>
-  </div>
-);
+const semItems = [
+  "A ideia some antes de virar post",
+  "Tela em branco paralisa",
+  "Apaga tudo — não ficou bom",
+  "Inspiração existe, execução não",
+  "Bloco de notas cheio, feed vazio",
+];
 
-const NotificationBubble = ({ icon: Icon, text, position, rotation, variant }: {
-  icon: React.ElementType; text: string; position: string; rotation: string; variant: "bad" | "good"
-}) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ delay: Math.random() * 0.4, type: "spring", stiffness: 200 }}
-    className={`absolute ${position} z-20 px-2.5 py-1.5 rounded-lg shadow-lg flex items-center gap-1.5 whitespace-nowrap text-[10px] font-medium ${
-      variant === "bad"
-        ? "bg-destructive/10 text-destructive border border-destructive/20"
-        : "bg-primary/10 text-primary border border-primary/20"
-    }`}
-    style={{ transform: `rotate(${rotation})` }}
-  >
-    <Icon className="w-3 h-3 flex-shrink-0" />
-    {text}
-  </motion.div>
-);
+const comItems = [
+  "Captura a ideia → post pronto",
+  "Nunca começa do zero",
+  "Tom de voz consistente",
+  "Criar flui naturalmente",
+  "Link vira material publicável",
+];
+
+const shareSignals = [
+  { icon: Share2, text: "1 compartilhamento", tone: "bad" as const },
+  { icon: MessageCircle, text: "0 comentários", tone: "bad" as const },
+  { icon: Share2, text: "93 compartilhamentos", tone: "good" as const },
+  { icon: MessageCircle, text: "64 comentários", tone: "good" as const },
+];
 
 const SSComparisonSection = () => {
   const scrollToCTA = (e?: React.MouseEvent) => {
@@ -59,114 +58,154 @@ const SSComparisonSection = () => {
   };
 
   return (
-    <section id="comparativo" className="py-28 overflow-hidden">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="comparativo" className="py-24 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-2xl mx-auto mb-20"
+          className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight text-balance">
-            Por que você trava na hora de <span className="font-serif italic text-primary">criar conteúdo?</span>
+          <span className="eyebrow-chip">Comparativo</span>
+          <h2 className="mt-5 text-balance text-3xl font-bold tracking-[-0.04em] text-foreground sm:text-5xl">
+            Por que você trava na hora de <span className="font-serif-display italic text-primary">criar conteúdo?</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-[17px] leading-relaxed">
+          <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
             Não é falta de criatividade. É tentar construir um post começando do nada.
           </p>
         </motion.div>
 
-        <div className="flex flex-row items-center justify-center gap-20 sm:gap-32 lg:gap-48">
-          {/* Phone SEM */}
-          <motion.div
-            initial={{ opacity: 0, x: -40, rotate: -6 }}
-            whileInView={{ opacity: 1, x: 0, rotate: -6 }}
+        <div className="grid gap-6 xl:grid-cols-2">
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative flex-shrink-0"
+            className="surface-card rounded-[2rem] p-5 sm:p-6"
           >
-            {semNotifications.map((n, i) => (
-              <NotificationBubble key={i} {...n} variant="bad" />
-            ))}
-            <PhoneFrame>
-              <div className="text-center mb-3">
-                <div className="w-7 h-7 rounded-full bg-destructive/10 mx-auto mb-1.5 flex items-center justify-center">
-                  <ThumbsDown className="w-3.5 h-3.5 text-destructive/60" />
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
+                  <ThumbsDown className="h-5 w-5" />
                 </div>
-                <p className="text-[10px] font-semibold text-foreground/40 uppercase tracking-wider">Sem SocialSquare</p>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-destructive">Sem SocialSquare</p>
               </div>
-              <div className="space-y-2">
-                {[
-                  "A ideia some antes de virar post",
-                  "Tela em branco paralisa",
-                  "Apaga tudo — não ficou bom",
-                  "Inspiração existe, execução não",
-                  "Bloco de notas cheio, feed vazio",
-                ].map((text, i) => (
-                  <div key={i} className="flex items-start gap-1.5 p-2 rounded-lg bg-destructive/[0.04] border border-destructive/[0.08]">
-                    <span className="text-destructive/40 text-[10px] mt-0.5">✕</span>
-                    <p className="text-[10px] text-foreground/50 leading-relaxed">{text}</p>
-                  </div>
+              <div className="flex flex-wrap gap-2">
+                {semNotifications.map(({ icon: Icon, text }) => (
+                  <span
+                    key={text}
+                    className="inline-flex items-center gap-2 rounded-full border border-destructive/15 bg-destructive/5 px-3 py-1.5 text-xs font-medium text-destructive"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {text}
+                  </span>
                 ))}
               </div>
-              <div className="mt-4 text-center">
-                <p className="text-[9px] text-foreground/30 font-medium">Resultado típico</p>
-                <p className="text-xl font-bold text-destructive/40 mt-0.5">0 posts</p>
-                <p className="text-[9px] text-foreground/30">essa semana</p>
-              </div>
-            </PhoneFrame>
-          </motion.div>
+            </div>
 
-          {/* Phone COM */}
-          <motion.div
-            initial={{ opacity: 0, x: 40, rotate: 6 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 6 }}
-            viewport={{ once: true }}
-            className="relative flex-shrink-0"
-          >
-            {comNotifications.map((n, i) => (
-              <NotificationBubble key={i} {...n} variant="good" />
-            ))}
-            <PhoneFrame>
-              <div className="text-center mb-3">
-                <div className="w-7 h-7 rounded-full bg-primary/10 mx-auto mb-1.5 flex items-center justify-center">
-                  <ThumbsUp className="w-3.5 h-3.5 text-primary" />
+            <div className="mt-6 space-y-3">
+              {semItems.map((text) => (
+                <div
+                  key={text}
+                  className="rounded-[1.3rem] border border-destructive/10 bg-white/75 px-4 py-3.5"
+                >
+                  <p className="text-sm leading-relaxed text-foreground/65">{text}</p>
                 </div>
-                <p className="text-[10px] font-semibold text-primary uppercase tracking-wider">Com SocialSquare</p>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {shareSignals
+                .filter((signal) => signal.tone === "bad")
+                .map(({ icon: Icon, text }) => (
+                  <span
+                    key={text}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-3 py-1.5 text-xs text-muted-foreground"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {text}
+                  </span>
+                ))}
+            </div>
+
+            <div className="mt-8 rounded-[1.5rem] border border-destructive/12 bg-destructive/[0.04] px-4 py-5 text-center">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-destructive/70">Resultado típico</p>
+              <p className="mt-3 text-4xl font-bold tracking-[-0.05em] text-destructive/80">0 posts</p>
+              <p className="mt-1 text-sm text-muted-foreground">essa semana</p>
+            </div>
+          </motion.article>
+
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.08 }}
+            className="glass-panel rounded-[2rem] p-5 sm:p-6"
+          >
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <ThumbsUp className="h-5 w-5" />
+                </div>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Com SocialSquare</p>
               </div>
-              <div className="space-y-2">
-                {[
-                  "Captura a ideia → post pronto",
-                  "Nunca começa do zero",
-                  "Tom de voz consistente",
-                  "Criar flui naturalmente",
-                  "Link vira material publicável",
-                ].map((text, i) => (
-                  <div key={i} className="flex items-start gap-1.5 p-2 rounded-lg bg-primary/[0.04] border border-primary/[0.08]">
-                    <span className="text-primary text-[10px] mt-0.5">✓</span>
-                    <p className="text-[10px] text-foreground/70 leading-relaxed">{text}</p>
-                  </div>
+              <div className="flex flex-wrap gap-2">
+                {comNotifications.map(({ icon: Icon, text }) => (
+                  <span
+                    key={text}
+                    className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/8 px-3 py-1.5 text-xs font-medium text-primary"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {text}
+                  </span>
                 ))}
               </div>
-              <div className="mt-4 text-center">
-                <p className="text-[9px] text-foreground/50 font-medium">Resultado típico</p>
-                <p className="text-xl font-bold text-primary mt-0.5">7 posts</p>
-                <p className="text-[9px] text-foreground/50">essa semana</p>
-              </div>
-            </PhoneFrame>
-          </motion.div>
+            </div>
+
+            <div className="mt-6 space-y-3">
+              {comItems.map((text) => (
+                <div
+                  key={text}
+                  className="rounded-[1.3rem] border border-primary/12 bg-white/82 px-4 py-3.5"
+                >
+                  <p className="text-sm leading-relaxed text-foreground/76">{text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {shareSignals
+                .filter((signal) => signal.tone === "good")
+                .map(({ icon: Icon, text }) => (
+                  <span
+                    key={text}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-white/75 px-3 py-1.5 text-xs text-muted-foreground"
+                  >
+                    <Icon className="h-3.5 w-3.5 text-primary" />
+                    {text}
+                  </span>
+                ))}
+            </div>
+
+            <div className="mt-8 rounded-[1.5rem] border border-primary/12 bg-primary/[0.05] px-4 py-5 text-center">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary/80">Resultado típico</p>
+              <p className="mt-3 text-4xl font-bold tracking-[-0.05em] text-primary">7 posts</p>
+              <p className="mt-1 text-sm text-muted-foreground">essa semana</p>
+            </div>
+          </motion.article>
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="mt-12 text-center"
         >
           <button
             onClick={scrollToCTA}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all"
+            className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground soft-shadow transition-all hover:bg-primary/92"
           >
             Ver na prática
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
         </motion.div>
       </div>

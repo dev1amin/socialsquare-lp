@@ -1,4 +1,4 @@
-import { Zap, Shield, Layers, PenTool, BarChart3, Users, ArrowRight } from "lucide-react";
+import { ArrowRight, BarChart3, Layers, PenTool, Shield, Users, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
@@ -21,78 +21,64 @@ const SSFeaturesSection = () => {
   };
 
   return (
-    <section id="funcionalidades" className="py-28">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="funcionalidades" className="py-24 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
-            Tudo para criar sem <span className="font-serif italic text-primary">travar</span>
+          <span className="eyebrow-chip">Funcionalidades</span>
+          <h2 className="mt-5 text-balance text-3xl font-bold tracking-[-0.04em] text-foreground sm:text-5xl">
+            Tudo para criar sem <span className="font-serif-display italic text-primary">travar</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-md mx-auto">
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
             Cada funcionalidade pensada para tirar você do bloqueio.
           </p>
         </motion.div>
 
-        {/* Bento-style grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {features.map((feature, i) => {
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {features.map((feature, index) => {
             const Icon = feature.icon;
-            const isLarge = i === 0 || i === 5;
             return (
-              <motion.div
-                key={i}
+              <motion.article
+                key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                className={`relative overflow-hidden rounded-2xl border border-border bg-background group hover:-translate-y-0.5 transition-all duration-300 ${
-                  isLarge ? "col-span-2 lg:col-span-1 p-8" : "p-6"
-                }`}
+                transition={{ delay: index * 0.05 }}
+                className="surface-card rounded-[1.8rem] p-5 sm:p-6"
               >
-                {/* Large tilted icon in background */}
-                <div className="absolute -right-6 -bottom-6 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 pointer-events-none">
-                  <Icon className="w-40 h-40 text-primary" style={{ transform: "rotate(-20deg)" }} />
-                </div>
-                {/* Blue glow */}
-                <div className="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-primary/[0.03] blur-3xl group-hover:bg-primary/[0.07] transition-all duration-500 pointer-events-none" />
-
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Stat badge top-right */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-9 h-9 rounded-xl bg-primary/[0.08] flex items-center justify-center">
-                      <Icon className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xl font-bold text-primary leading-none">{feature.stat}</span>
-                      <p className="text-[10px] text-muted-foreground">{feature.statLabel}</p>
-                    </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
                   </div>
-
-                  <h3 className="font-semibold text-foreground text-[15px] mb-1">{feature.title}</h3>
-                  <p className="text-[13px] text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <div className="rounded-[1.15rem] border border-primary/12 bg-primary/[0.05] px-3 py-2 text-right">
+                    <p className="text-xl font-bold tracking-[-0.04em] text-primary">{feature.stat}</p>
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{feature.statLabel}</p>
+                  </div>
                 </div>
-              </motion.div>
+
+                <h3 className="mt-6 text-xl font-semibold tracking-[-0.03em] text-foreground">{feature.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{feature.description}</p>
+              </motion.article>
             );
           })}
         </div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-14"
+          className="mt-12 text-center"
         >
           <button
             onClick={scrollToPrecos}
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all"
+            className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground soft-shadow transition-all hover:bg-primary/92"
           >
             Ver planos e preços
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
         </motion.div>
       </div>

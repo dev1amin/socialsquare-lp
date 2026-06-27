@@ -1,86 +1,83 @@
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { motion } from "framer-motion";
 
-const generateStars = (count: number) => {
-  const stars: { x: number; y: number; size: number; rotation: number; opacity: number; type: number }[] = [];
-  for (let i = 0; i < count; i++) {
-    stars.push({
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 8 + Math.random() * 16,
-      rotation: Math.random() * 360,
-      opacity: 0.06 + Math.random() * 0.1,
-      type: i % 3,
-    });
-  }
-  return stars;
-};
-
-const stars = generateStars(20);
-
-const StarShape = ({ size, rotation, opacity, type }: { size: number; rotation: number; opacity: number; type: number }) => {
-  if (type === 0) {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ transform: `rotate(${rotation}deg)` }}>
-        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor" opacity={opacity} />
-      </svg>
-    );
-  }
-  if (type === 1) {
-    return (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ transform: `rotate(${rotation}deg)` }}>
-        <path d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5Z" fill="currentColor" opacity={opacity} />
-      </svg>
-    );
-  }
-  return (
-    <svg width={size * 0.7} height={size} viewBox="0 0 16 24" fill="none" style={{ transform: `rotate(${rotation}deg)` }}>
-      <path d="M8 0L10 10L8 24L6 10Z" fill="currentColor" opacity={opacity} />
-      <path d="M0 12L8 10L16 12L8 14Z" fill="currentColor" opacity={opacity * 0.7} />
-    </svg>
-  );
-};
+const canvasHighlights = [
+  "Capture o que te inspira",
+  "O sistema transforma em conteúdo",
+  "Você decide. Aprova. Publica.",
+];
 
 const SSCanvasShowcase = () => {
   return (
-    <section id="produto" className="overflow-hidden relative">
-      {/* Subtle stars background */}
-      <div className="absolute inset-0 pointer-events-none text-primary">
-        {stars.map((star, i) => (
+    <section id="produto" className="py-24 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
           <motion.div
-            key={i}
-            className="absolute"
-            style={{ left: `${star.x}%`, top: `${star.y}%` }}
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.03, duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <StarShape size={star.size} rotation={star.rotation} opacity={star.opacity} type={star.type} />
-          </motion.div>
-        ))}
-      </div>
-
-      <ContainerScroll
-        titleComponent={
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
-              Conheça o <span className="font-serif italic text-primary">Canvas</span>
+            <span className="eyebrow-chip">Canvas</span>
+            <h2 className="mt-5 max-w-xl text-balance text-3xl font-bold tracking-[-0.04em] text-foreground sm:text-5xl">
+              Conheça o <span className="font-serif-display italic text-primary">Canvas</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto text-lg">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
               O ambiente onde inspiração vira conteúdo.
             </p>
-          </div>
-        }
-      >
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-2xl bg-secondary">
-          <img
-            src="https://i.imgur.com/gHsvRkQ.png"
-            alt="SocialSquare Canvas"
-            className="w-full h-full object-cover rounded-2xl"
-          />
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              {canvasHighlights.map((item, index) => (
+                <div
+                  key={item}
+                  className="surface-card rounded-[1.5rem] p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-sm font-semibold text-primary">
+                      0{index + 1}
+                    </span>
+                    <p className="text-sm font-medium leading-relaxed text-foreground/78">{item}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="relative"
+          >
+            <div className="absolute left-8 right-8 top-10 h-48 rounded-full bg-primary/15 blur-[90px]" />
+
+            <div className="glass-panel relative overflow-hidden rounded-[2rem] p-4 sm:p-5">
+              <div className="rounded-[1.5rem] border border-border/80 bg-slate-950 p-3 sm:p-4">
+                <img
+                  src="https://i.imgur.com/gHsvRkQ.png"
+                  alt="SocialSquare Canvas"
+                  className="aspect-[4/3] w-full rounded-[1.1rem] object-cover"
+                />
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-[1.4rem] border border-border/80 bg-white/80 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Inspiração</p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/75">
+                    Uma notícia, um vídeo, uma frase.
+                  </p>
+                </div>
+                <div className="rounded-[1.4rem] border border-border/80 bg-white/80 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Consistência</p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/75">
+                    Toda vez que você entra, sai com conteúdo na mão.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </ContainerScroll>
+      </div>
     </section>
   );
 };
