@@ -67,8 +67,9 @@ const Hero = () => {
           </ul>
         </div>
 
-        {/* A janela do produto. */}
-        <div className="relative mx-auto mt-14 max-w-[70rem] md:mt-20">
+        {/* A janela do produto. No celular ela sangra até a borda da tela
+            para caber inteira — nada da gravação fica cortado. */}
+        <div className="relative -mx-[var(--gutter)] mt-14 md:mx-auto md:mt-20 md:max-w-[70rem]">
           {/* Slides prontos encostados na janela, só onde há espaço. */}
           <div className="pointer-events-none absolute -left-16 top-16 z-20 hidden w-[8.5rem] -rotate-[7deg] xl:block">
             <div className="frame frame-45">
@@ -92,29 +93,26 @@ const Hero = () => {
           </div>
 
           {/* Moldura: raio externo 32, padding 8 → raio interno 24. */}
-          <figure className="relative overflow-hidden rounded-xl border border-line bg-white p-2 shadow-float">
-            <div className="overflow-hidden rounded-lg bg-[#F4F5F8]">
-              <div className="flex items-center gap-2 border-b border-line bg-white px-4 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-ink/10" />
-                <span className="h-2.5 w-2.5 rounded-full bg-ink/10" />
-                <span className="h-2.5 w-2.5 rounded-full bg-ink/10" />
-                <span className="ml-3 truncate rounded-full bg-paper px-3 py-1 text-[12px] text-ink-3">
+          <figure className="relative overflow-hidden border-y border-line bg-white p-1 shadow-float md:rounded-xl md:border md:p-2">
+            <div className="overflow-hidden bg-[#F4F5F8] md:rounded-lg">
+              <div className="flex items-center gap-2 border-b border-line bg-white px-3 py-2 md:px-4 md:py-3">
+                <span className="h-2 w-2 rounded-full bg-ink/10 md:h-2.5 md:w-2.5" />
+                <span className="h-2 w-2 rounded-full bg-ink/10 md:h-2.5 md:w-2.5" />
+                <span className="h-2 w-2 rounded-full bg-ink/10 md:h-2.5 md:w-2.5" />
+                <span className="ml-2 truncate rounded-full bg-paper px-2.5 py-0.5 text-[11px] text-ink-3 md:ml-3 md:px-3 md:py-1 md:text-[12px]">
                   socialsquare.com.br/editor
                 </span>
               </div>
 
-              {/* No celular a janela inteira ficaria ilegível: aproxima
-                  na prancheta e volta ao enquadramento cheio a partir de md. */}
-              <div className="overflow-hidden">
               {reduceMotion ? (
                 <img
                   src={EDITOR_VIDEO.poster}
                   alt="Editor do SocialSquare com um carrossel aberto"
-                  className="w-[250%] max-w-none -translate-x-[24%] md:w-full md:translate-x-0"
+                  className="w-full"
                 />
               ) : (
                 <video
-                  className="w-[250%] max-w-none -translate-x-[24%] md:w-full md:translate-x-0"
+                  className="w-full"
                   poster={EDITOR_VIDEO.poster}
                   autoPlay
                   muted
@@ -127,12 +125,16 @@ const Hero = () => {
                   <source src={EDITOR_VIDEO.mp4} type="video/mp4" />
                 </video>
               )}
-              </div>
             </div>
           </figure>
 
-          <figcaption className="mt-4 text-center text-[14px] text-ink-3">
-            O editor de verdade, gravado durante o uso.
+          <figcaption className="mt-4 px-[var(--gutter)] text-center text-[14px] text-ink-3 md:px-0">
+            O editor de verdade, gravado durante o uso. Ele fica maior conforme
+            a tela — e a réplica navegável está{" "}
+            <a href="#app" className="font-semibold text-blue underline-offset-4 hover:underline">
+              logo abaixo
+            </a>
+            .
           </figcaption>
         </div>
       </Container>

@@ -127,7 +127,7 @@
 
   .h2 {
     @apply display;
-    font-size: clamp(2rem, 7vw, 3.25rem);
+    font-size: clamp(2.375rem, 9vw, 3.5rem);
     line-height: 1.05;
   }
 
@@ -135,7 +135,7 @@
     font-family: 'Bricolage Grotesque', 'Schibsted Grotesk', sans-serif;
     font-variation-settings: 'opsz' 24;
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     line-height: 1.25;
     letter-spacing: -0.02em;
   }
