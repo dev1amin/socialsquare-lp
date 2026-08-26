@@ -22,12 +22,23 @@ import news2 from "@/assets/deck/t6-2.webp";
 import news3 from "@/assets/deck/t6-3.webp";
 import news4 from "@/assets/deck/t6-4.webp";
 
+import editorMp4 from "@/assets/video/editor-demo.mp4";
+import editorWebm from "@/assets/video/editor-demo.webm";
+import editorPoster from "@/assets/video/editor-poster.webp";
+
 import cover1 from "@/assets/covers/cover-1.webp";
 import cover2 from "@/assets/covers/cover-2.webp";
 import cover3 from "@/assets/covers/cover-3.webp";
 import cover4 from "@/assets/covers/cover-4.webp";
 import cover5 from "@/assets/covers/cover-5.webp";
 import cover6 from "@/assets/covers/cover-6.webp";
+
+/** Gravação real do editor do SocialSquare. */
+export const EDITOR_VIDEO = {
+  mp4: editorMp4,
+  webm: editorWebm,
+  poster: editorPoster,
+};
 
 /** Onde a pessoa entra de verdade. */
 export const SIGNUP_URL = "https://www.socialsquare.com.br/pricing";
