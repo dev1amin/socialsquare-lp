@@ -14,10 +14,24 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        sans: ['Schibsted Grotesk', 'system-ui', 'sans-serif'],
+        display: ['Bricolage Grotesque', 'Schibsted Grotesk', 'sans-serif'],
       },
       colors: {
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          2: "hsl(var(--ink-2))",
+          3: "hsl(var(--ink-3))",
+        },
+        blue: {
+          DEFAULT: "hsl(var(--blue))",
+          deep: "hsl(var(--blue-deep))",
+        },
+        violet: "hsl(var(--violet))",
+        sun: "hsl(var(--sun))",
+        paper: "hsl(var(--paper))",
+        cloud: "hsl(var(--cloud))",
+        line: "hsl(var(--line))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -68,9 +82,13 @@ export default {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        xl: "var(--r-xl)",
+        lg: "var(--r-lg)",
+        md: "var(--r-md)",
+        sm: "var(--r-sm)",
+      },
+      maxWidth: {
+        content: "1280px",
       },
       keyframes: {
         "accordion-down": {

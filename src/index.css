@@ -1,76 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ==================================================================
+   SocialSquare — sistema visual da landing.
+   Claro, colorido e desenhado primeiro para o polegar: tudo começa
+   em 390px e cresce a partir daí. Grade de 4px, contêiner de 1280px.
+   ================================================================== */
+
 @layer base {
   :root {
-    --background: 216 43% 98%;
-    --foreground: 222 37% 12%;
+    /* --- Tinta -------------------------------------------------- */
+    --ink: 224 49% 9%;        /* #0B1020 */
+    --ink-2: 224 18% 33%;     /* #464E63 */
+    --ink-3: 223 18% 55%;     /* #79839E */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 37% 12%;
+    /* --- Marca -------------------------------------------------- */
+    --blue: 226 100% 59%;     /* #2C5BFF */
+    --blue-deep: 227 82% 42%; /* #1338C4 */
+    --violet: 251 100% 68%;   /* #7A5BFF */
+    --sun: 42 100% 62%;       /* #FFC53D */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 37% 12%;
+    /* --- Superfícies -------------------------------------------- */
+    --paper: 228 47% 98%;     /* #F7F8FC */
+    --cloud: 225 56% 96%;     /* #EDF0FA */
+    --line: 224 38% 92%;      /* #E3E7F2 */
+    --white: 0 0% 100%;
 
-    --primary: 223 82% 55%;
+    /* --- Layout ------------------------------------------------- */
+    --nav-h: 64px;
+    --gutter: 20px;
+
+    /* --- Raios (a filha subtrai o padding da mãe) --------------- */
+    --r-xl: 32px;
+    --r-lg: 24px;
+    --r-md: 16px;
+    --r-sm: 12px;
+
+    /* --- Tokens shadcn (accordion, foco, etc.) ------------------ */
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--white);
+    --card-foreground: var(--ink);
+    --popover: var(--white);
+    --popover-foreground: var(--ink);
+    --primary: var(--blue);
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 216 38% 95%;
-    --secondary-foreground: 222 37% 12%;
-
-    --muted: 218 30% 95%;
-    --muted-foreground: 220 14% 44%;
-
-    --accent: 223 82% 55%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 72% 51%;
+    --secondary: var(--cloud);
+    --secondary-foreground: var(--ink);
+    --muted: var(--cloud);
+    --muted-foreground: var(--ink-3);
+    --accent: var(--cloud);
+    --accent-foreground: var(--ink);
+    --destructive: 4 90% 58%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 219 26% 88%;
-    --input: 219 26% 88%;
-    --ring: 223 82% 55%;
-
-    --radius: 1rem;
-
-    /* Brand tokens */
-    --brand: 223 82% 55%;
-    --brand-light: 219 92% 96%;
-    --brand-medium: 220 63% 87%;
-    --brand-dark: 223 46% 20%;
-
-    --sidebar-background: 216 43% 98%;
-    --sidebar-foreground: 222 37% 12%;
-    --sidebar-primary: 223 82% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 216 38% 95%;
-    --sidebar-accent-foreground: 222 37% 12%;
-    --sidebar-border: 219 26% 88%;
-    --sidebar-ring: 223 82% 55%;
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--blue);
+    --radius: 16px;
   }
-}
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
+  @media (min-width: 768px) {
+    :root {
+      --nav-h: 72px;
+      --gutter: 32px;
+    }
   }
 
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    /* Âncoras param abaixo da barra fixa. */
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
-    background:
-      radial-gradient(circle at top left, hsl(219 100% 96% / 0.9), transparent 28%),
-      radial-gradient(circle at 85% 18%, hsl(216 100% 97% / 0.95), transparent 22%),
-      linear-gradient(180deg, hsl(216 43% 99%) 0%, hsl(216 36% 97%) 50%, hsl(216 43% 99%) 100%);
-    font-family: 'Manrope', system-ui, sans-serif;
+    background-color: hsl(var(--paper));
+    color: hsl(var(--ink));
+    font-family: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   img {
@@ -79,87 +97,183 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.15);
-    color: hsl(var(--foreground));
+    background: hsl(var(--blue) / 0.16);
+    color: hsl(var(--ink));
+  }
+
+  :focus-visible {
+    outline: 3px solid hsl(var(--blue));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* --- Tipografia --------------------------------------------- */
+
+  .display {
+    font-family: 'Bricolage Grotesque', 'Schibsted Grotesk', sans-serif;
+    font-variation-settings: 'opsz' 96;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .h1 {
+    @apply display;
+    font-size: clamp(2.5rem, 10.5vw, 4.75rem);
+  }
+
+  .h2 {
+    @apply display;
+    font-size: clamp(2rem, 7vw, 3.25rem);
+    line-height: 1.05;
+  }
+
+  .h3 {
+    font-family: 'Bricolage Grotesque', 'Schibsted Grotesk', sans-serif;
+    font-variation-settings: 'opsz' 24;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  /* Regra fixa: título colado no parágrafo que ele apresenta. */
+  .lead {
+    margin-top: 32px;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: hsl(var(--ink-2));
+    max-width: 34rem;
+  }
+
+  @media (min-width: 768px) {
+    .lead {
+      font-size: 1.1875rem;
+    }
+  }
+
+  /* --- Adesivo: a única peça “feita à mão” da página ----------- */
+  .sticker {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    padding-inline: 0.14em;
+  }
+
+  .sticker::before {
+    content: '';
+    position: absolute;
+    inset: 0.1em -0.1em 0.06em;
+    z-index: -1;
+    background: hsl(var(--sun));
+    border-radius: 0.28em;
+    transform: rotate(-1.6deg);
+  }
+
+  .sticker-blue::before {
+    background: hsl(var(--blue));
+  }
+
+  /* --- Superfícies -------------------------------------------- */
+
+  .card {
+    background: hsl(var(--white));
+    border: 1px solid hsl(var(--line));
+    border-radius: var(--r-lg);
+    box-shadow:
+      0 1px 2px hsl(var(--ink) / 0.04),
+      0 6px 16px -6px hsl(var(--ink) / 0.06);
+  }
+
+  /* Moldura de mídia: sempre emoldurada, nunca solta na página. */
+  .frame {
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: hsl(var(--ink));
+    box-shadow:
+      0 2px 6px hsl(var(--ink) / 0.06),
+      0 18px 40px -18px hsl(var(--ink) / 0.28);
+  }
+
+  .frame-45 {
+    aspect-ratio: 4 / 5;
   }
 }
 
 @layer utilities {
-  .font-serif-display {
-    font-family: 'Instrument Serif', Georgia, serif;
+  .shadow-blue {
+    box-shadow:
+      0 2px 6px hsl(var(--blue) / 0.24),
+      0 12px 28px -8px hsl(var(--blue) / 0.42);
   }
 
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(223 82% 55%), hsl(223 72% 38%));
+  .shadow-float {
+    box-shadow:
+      0 4px 10px hsl(var(--ink) / 0.05),
+      0 28px 64px -24px hsl(var(--ink) / 0.28);
   }
 
-  .text-balance {
-    text-wrap: balance;
+  .text-gradient {
+    background: linear-gradient(96deg, hsl(var(--blue)), hsl(var(--violet)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  .soft-shadow {
-    box-shadow: 0 12px 32px hsl(223 30% 16% / 0.08),
-      0 2px 8px hsl(223 30% 16% / 0.04);
-  }
-
-  .soft-shadow-lg {
-    box-shadow: 0 26px 70px hsl(223 30% 16% / 0.13),
-      0 10px 26px hsl(223 30% 16% / 0.08);
-  }
-
-  .surface-card {
-    background: linear-gradient(180deg, hsl(0 0% 100% / 0.96), hsl(216 40% 98% / 0.92));
-    border: 1px solid hsl(219 26% 88% / 0.95);
-    border-radius: calc(var(--radius) + 0.125rem);
-    box-shadow: 0 18px 42px hsl(223 28% 18% / 0.07);
-  }
-
-  .surface-elevated {
-    background: linear-gradient(180deg, hsl(0 0% 100%), hsl(216 50% 98%));
-    border: 1px solid hsl(219 26% 88% / 0.95);
-    border-radius: calc(var(--radius) + 0.25rem);
-    box-shadow: 0 28px 60px hsl(223 30% 16% / 0.11),
-      0 8px 18px hsl(223 30% 16% / 0.05);
-  }
-
-  .surface-subtle {
-    background: linear-gradient(180deg, hsl(216 56% 98%), hsl(217 31% 95%));
-    border-radius: var(--radius);
-  }
-
-  .brand-gradient-bg {
-    background: linear-gradient(180deg, hsl(216 82% 98%) 0%, hsl(218 52% 96%) 100%);
-    border-block: 1px solid hsl(219 26% 90%);
-  }
-
-  .eyebrow-chip {
-    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em];
-    background: hsl(0 0% 100% / 0.68);
-    border-color: hsl(219 40% 85% / 0.9);
-    color: hsl(var(--primary));
-    backdrop-filter: blur(14px);
-  }
-
-  .glass-panel {
-    background: linear-gradient(180deg, hsl(0 0% 100% / 0.92), hsl(216 48% 98% / 0.9));
-    border: 1px solid hsl(219 32% 86% / 0.9);
-    box-shadow: 0 28px 70px hsl(223 33% 16% / 0.12);
-    backdrop-filter: blur(20px);
-  }
-
-  .grid-backdrop {
-    background-image:
-      linear-gradient(to right, hsl(219 30% 90% / 0.7) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(219 30% 90% / 0.7) 1px, transparent 1px);
-    background-size: 64px 64px;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
+  /* Trilho arrastável com o polegar. */
+  .rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
   }
-  .scrollbar-hide::-webkit-scrollbar {
+  .rail::-webkit-scrollbar {
     display: none;
+  }
+  .rail > * {
+    scroll-snap-align: center;
+    flex: none;
+  }
+  .rail-start > * {
+    scroll-snap-align: start;
+  }
+
+  /* Trilho que sangra à direita mas começa alinhado ao conteúdo. */
+  .rail-gutter {
+    padding-inline-start: max(
+      var(--gutter),
+      calc((100% - 1280px) / 2 + var(--gutter))
+    );
+    padding-inline-end: var(--gutter);
+    scroll-padding-inline-start: max(
+      var(--gutter),
+      calc((100% - 1280px) / 2 + var(--gutter))
+    );
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
